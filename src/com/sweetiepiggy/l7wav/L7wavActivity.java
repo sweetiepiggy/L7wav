@@ -20,7 +20,13 @@
 package com.sweetiepiggy.l7wav;
 
 import android.app.Activity;
+import android.media.AudioFormat;
+import android.media.AudioManager;
+import android.media.AudioTrack;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class L7wavActivity extends Activity
 {
@@ -29,6 +35,28 @@ public class L7wavActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+
+		Button a_button = (Button)findViewById(R.id.a_button);
+		a_button.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Toast.makeText(getApplicationContext(), "a",
+						Toast.LENGTH_SHORT).show();
+				int minSize = AudioTrack.getMinBufferSize(44100, AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT);
+				AudioTrack track = new AudioTrack(AudioManager.STREAM_MUSIC, 44100,
+					AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT,
+					minSize, AudioTrack.MODE_STREAM);
+				track.play();
+				short[] buf = new short[20480];
+				float angle = 0;
+				for (int i=0; i < 20480; ++i) {
+					buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
+					angle += (float)(2*Math.PI) * 440 / 44100;
+				}
+				track.write(buf, 0 , 20480);
+				Toast.makeText(getApplicationContext(), "b",
+						Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 }
