@@ -19,6 +19,14 @@
 
 --------------------------------------------------------------------------------
 
+    DESCRIPTION
+
+    A keyboard that synthesizes simple sounds like square, saw, and sine waves.
+
+    Not much progress has been made and this is not on the Android Market yet.
+
+--------------------------------------------------------------------------------
+
     INSTALLATION
     
     See developer.android.com for tutorials on how to build Android apps
@@ -29,9 +37,6 @@
 --------------------------------------------------------------------------------
 
     LINKS
-
-    Download - Android Market
-    https://market.android.com/details?id=com.sweetiepiggy.l7wav
 
     Twitter
     http://twitter.com/sweetiepiggyapp
