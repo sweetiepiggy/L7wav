@@ -2,26 +2,28 @@
 
     Copyright (C) 2012 Sweetie Piggy Apps <sweetiepiggyapps@gmail.com>
 
-    This file is part of L7wav.
+    This file is part of L7~.
 
-    L7wav is free software; you can redistribute it and/or modify
+    L7~ is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 3 of the License, or
     (at your option) any later version.
 
-    L7wav is distributed in the hope that it will be useful,
+    L7~ is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with L7wav; if not, see <http://www.gnu.org/licenses/>.
+    along with L7~; if not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
 
     DESCRIPTION
 
     A keyboard that synthesizes simple sounds like square, saw, and sine waves.
+
+    Pronounced as "square wave".
 
     Not much progress has been made and this is not on the Android Market yet.
 
@@ -42,7 +44,7 @@
     http://twitter.com/sweetiepiggyapp
 
     Source - GitHub
-    https://github.com/sweetiepiggy/L7wav
+    https://github.com/sweetiepiggy/L7~
 
 --------------------------------------------------------------------------------
 
