@@ -29,10 +29,8 @@ import android.widget.Button;
 
 public class L7wavActivity extends Activity
 {
-	int minSize = AudioTrack.getMinBufferSize(44100, AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT);
-	AudioTrack track = new AudioTrack(AudioManager.STREAM_MUSIC, 44100,
-		AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT,
-		minSize, AudioTrack.MODE_STREAM);
+	int minSize;
+	AudioTrack track;
 	short[] buf = new short[20480];
 
 	@Override
@@ -41,92 +39,80 @@ public class L7wavActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		minSize = AudioTrack.getMinBufferSize(44100, AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT);
+		track = new AudioTrack(AudioManager.STREAM_MUSIC, 44100,
+			AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT,
+			minSize, AudioTrack.MODE_STREAM);
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+//		AudioManager am = getSystemService(Context.AUDIO_SERVICE);
+//		int result;
+//		do {
+//			result = am.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC,
+//					AudioManager.AUDIOFOCUS_GAIN);
+//			sleep(1);
+//		} while (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
+
 		track.play();
 
 		Button a_button = (Button)findViewById(R.id.a_button);
 		a_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				float angle = 0;
-				for (int i=0; i < 20480; ++i) {
-					buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
-					angle += (float)(2*Math.PI) * 440 / 44100;
-				}
-				track.write(buf, 0 , 20480);
+				play_sound(440);
 			}
 		});
 
 		Button b_button = (Button)findViewById(R.id.b_button);
 		b_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				float angle = 0;
-				for (int i=0; i < 20480; ++i) {
-					buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
-					angle += (float)(2*Math.PI) * 493.883 / 44100;
-				}
-				track.write(buf, 0 , 20480);
+				play_sound(493.883);
 			}
 		});
 
 		Button c_button = (Button)findViewById(R.id.c_button);
 		c_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				float angle = 0;
-				for (int i=0; i < 20480; ++i) {
-					buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
-					angle += (float)(2*Math.PI) * 523.251 / 44100;
-				}
-				track.write(buf, 0 , 20480);
+				play_sound(523.251);
 			}
 		});
 
 		Button d_button = (Button)findViewById(R.id.d_button);
 		d_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				float angle = 0;
-				for (int i=0; i < 20480; ++i) {
-					buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
-					angle += (float)(2*Math.PI) * 587.330 / 44100;
-				}
-				track.write(buf, 0 , 20480);
+				play_sound(587.33);
 			}
 		});
 
 		Button e_button = (Button)findViewById(R.id.e_button);
 		e_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				float angle = 0;
-				for (int i=0; i < 20480; ++i) {
-					buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
-					angle += (float)(2*Math.PI) * 659.255 / 44100;
-				}
-				track.write(buf, 0 , 20480);
+				play_sound(659.255);
 			}
 		});
 
 		Button f_button = (Button)findViewById(R.id.f_button);
 		f_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				float angle = 0;
-				for (int i=0; i < 20480; ++i) {
-					buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
-					angle += (float)(2*Math.PI) * 698.456 / 44100;
-				}
-				track.write(buf, 0 , 20480);
+				play_sound(698.456);
 			}
 		});
 
 		Button g_button = (Button)findViewById(R.id.g_button);
 		g_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				float angle = 0;
-				for (int i=0; i < 20480; ++i) {
-					buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
-					angle += (float)(2*Math.PI) * 783.991 / 44100;
-				}
-				track.write(buf, 0 , 20480);
+				play_sound(783.991);
 			}
 		});
 	}
 
+	void play_sound(double freq)
+	{
+		float angle = 0;
+		for (int i=0; i < 20480; ++i) {
+			buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
+			angle += (float)(2*Math.PI) * freq / 44100;
+		}
+		track.write(buf, 0 , 20480);
+	}
 }
 
