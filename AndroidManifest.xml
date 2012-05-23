@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="0.0.1" >
 
-    <uses-sdk android:minSdkVersion="7" />
+    <uses-sdk android:minSdkVersion="3" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -21,3 +21,4 @@
     </application>
 
 </manifest>
+
