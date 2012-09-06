@@ -30,9 +30,15 @@ import android.widget.Button;
 public class L7wavActivity extends Activity
 {
 	static final int SAMPLE_SIZE = 4410;
-	int minSize;
-	AudioTrack track;
+	AudioTrack mTrack;
 	short[] buf = new short[SAMPLE_SIZE];
+	short[] mSnd_a = new short[SAMPLE_SIZE];
+	short[] mSnd_b = new short[SAMPLE_SIZE];
+	short[] mSnd_c = new short[SAMPLE_SIZE];
+	short[] mSnd_d = new short[SAMPLE_SIZE];
+	short[] mSnd_e = new short[SAMPLE_SIZE];
+	short[] mSnd_f = new short[SAMPLE_SIZE];
+	short[] mSnd_g = new short[SAMPLE_SIZE];
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -40,8 +46,10 @@ public class L7wavActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		minSize = AudioTrack.getMinBufferSize(44100, AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT);
-		track = new AudioTrack(AudioManager.STREAM_MUSIC, 44100,
+		init_snd_arrays();
+
+		int minSize = AudioTrack.getMinBufferSize(44100, AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT);
+		mTrack = new AudioTrack(AudioManager.STREAM_MUSIC, 44100,
 			AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT,
 			minSize, AudioTrack.MODE_STREAM);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -54,66 +62,80 @@ public class L7wavActivity extends Activity
 //			sleep(1);
 //		} while (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
 
-		track.play();
+		mTrack.play();
 
 		Button a_button = (Button)findViewById(R.id.a_button);
 		a_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				play_sound(440);
+				play_sound(mSnd_a);
 			}
 		});
 
 		Button b_button = (Button)findViewById(R.id.b_button);
 		b_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				play_sound(493.883);
+				play_sound(mSnd_b);
 			}
 		});
 
 		Button c_button = (Button)findViewById(R.id.c_button);
 		c_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				play_sound(523.251);
+				play_sound(mSnd_c);
 			}
 		});
 
 		Button d_button = (Button)findViewById(R.id.d_button);
 		d_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				play_sound(587.33);
+				play_sound(mSnd_d);
 			}
 		});
 
 		Button e_button = (Button)findViewById(R.id.e_button);
 		e_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				play_sound(659.255);
+				play_sound(mSnd_e);
 			}
 		});
 
 		Button f_button = (Button)findViewById(R.id.f_button);
 		f_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				play_sound(698.456);
+				play_sound(mSnd_f);
 			}
 		});
 
 		Button g_button = (Button)findViewById(R.id.g_button);
 		g_button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				play_sound(783.991);
+				play_sound(mSnd_g);
 			}
 		});
 	}
 
-	void play_sound(double freq)
+	void init_snd_arrays()
 	{
+		init_sin_wav(mSnd_a, 440);
+		init_sin_wav(mSnd_b, 493.883);
+		init_sin_wav(mSnd_c, 523.251);
+		init_sin_wav(mSnd_d, 587.33);
+		init_sin_wav(mSnd_e, 659.255);
+		init_sin_wav(mSnd_f, 698.456);
+		init_sin_wav(mSnd_g, 783.991);
+	}
+
+	void init_sin_wav(short[] buf, double freq) {
 		float angle = 0;
 		for (int i=0; i < SAMPLE_SIZE; ++i) {
 			buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
 			angle += (float)(2*Math.PI) * freq / 44100;
 		}
-		track.write(buf, 0 , SAMPLE_SIZE);
+	}
+
+	void play_sound(short[] buf)
+	{
+		mTrack.write(buf, 0 , SAMPLE_SIZE);
 	}
 }
 
