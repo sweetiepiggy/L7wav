@@ -29,9 +29,10 @@ import android.widget.Button;
 
 public class L7wavActivity extends Activity
 {
+	static final int SAMPLE_SIZE = 4410;
 	int minSize;
 	AudioTrack track;
-	short[] buf = new short[20480];
+	short[] buf = new short[SAMPLE_SIZE];
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -108,11 +109,11 @@ public class L7wavActivity extends Activity
 	void play_sound(double freq)
 	{
 		float angle = 0;
-		for (int i=0; i < 20480; ++i) {
+		for (int i=0; i < SAMPLE_SIZE; ++i) {
 			buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
 			angle += (float)(2*Math.PI) * freq / 44100;
 		}
-		track.write(buf, 0 , 20480);
+		track.write(buf, 0 , SAMPLE_SIZE);
 	}
 }
 
