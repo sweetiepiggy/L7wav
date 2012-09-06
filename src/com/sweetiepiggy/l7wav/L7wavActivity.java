@@ -57,7 +57,44 @@ public class L7wavActivity extends Activity
 		setContentView(R.layout.main);
 
 		init_snd_arrays();
+		init_buttons();
+		init_audio_track();
+	}
 
+	void init_snd_arrays()
+	{
+		init_sin_wav(mSnd_a, FREQ_A);
+		init_sin_wav(mSnd_b, FREQ_B);
+		init_sin_wav(mSnd_c, FREQ_C);
+		init_sin_wav(mSnd_d, FREQ_D);
+		init_sin_wav(mSnd_e, FREQ_E);
+		init_sin_wav(mSnd_f, FREQ_F);
+		init_sin_wav(mSnd_g, FREQ_G);
+	}
+
+	void init_buttons()
+	{
+		init_button(R.id.a_button, mSnd_a);
+		init_button(R.id.b_button, mSnd_b);
+		init_button(R.id.c_button, mSnd_c);
+		init_button(R.id.d_button, mSnd_d);
+		init_button(R.id.e_button, mSnd_e);
+		init_button(R.id.f_button, mSnd_f);
+		init_button(R.id.g_button, mSnd_g);
+	}
+
+	void init_button(int button_id, final short[] buf)
+	{
+		Button button = (Button) findViewById(button_id);
+		button.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				play_sound(buf);
+			}
+		});
+	}
+
+	void init_audio_track()
+	{
 		int minSize = AudioTrack.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT);
 		mTrack = new AudioTrack(AudioManager.STREAM_MUSIC, SAMPLE_RATE,
 			AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT,
@@ -73,66 +110,6 @@ public class L7wavActivity extends Activity
 //		} while (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
 
 		mTrack.play();
-
-		Button a_button = (Button)findViewById(R.id.a_button);
-		a_button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				play_sound(mSnd_a);
-			}
-		});
-
-		Button b_button = (Button)findViewById(R.id.b_button);
-		b_button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				play_sound(mSnd_b);
-			}
-		});
-
-		Button c_button = (Button)findViewById(R.id.c_button);
-		c_button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				play_sound(mSnd_c);
-			}
-		});
-
-		Button d_button = (Button)findViewById(R.id.d_button);
-		d_button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				play_sound(mSnd_d);
-			}
-		});
-
-		Button e_button = (Button)findViewById(R.id.e_button);
-		e_button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				play_sound(mSnd_e);
-			}
-		});
-
-		Button f_button = (Button)findViewById(R.id.f_button);
-		f_button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				play_sound(mSnd_f);
-			}
-		});
-
-		Button g_button = (Button)findViewById(R.id.g_button);
-		g_button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				play_sound(mSnd_g);
-			}
-		});
-	}
-
-	void init_snd_arrays()
-	{
-		init_sin_wav(mSnd_a, FREQ_A);
-		init_sin_wav(mSnd_b, FREQ_B);
-		init_sin_wav(mSnd_c, FREQ_C);
-		init_sin_wav(mSnd_d, FREQ_D);
-		init_sin_wav(mSnd_e, FREQ_E);
-		init_sin_wav(mSnd_f, FREQ_F);
-		init_sin_wav(mSnd_g, FREQ_G);
 	}
 
 	void init_sin_wav(short[] buf, double freq) {
