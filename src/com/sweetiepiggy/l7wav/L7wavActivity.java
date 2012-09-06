@@ -29,7 +29,17 @@ import android.widget.Button;
 
 public class L7wavActivity extends Activity
 {
-	static final int SAMPLE_SIZE = 4410;
+	static final int SAMPLE_RATE = 44100;
+	static final int SAMPLE_SIZE = SAMPLE_RATE / 10;
+
+	static final double FREQ_A =  440;
+	static final double FREQ_B =  493.883;
+	static final double FREQ_C =  523.251;
+	static final double FREQ_D =  587.33;
+	static final double FREQ_E =  659.255;
+	static final double FREQ_F =  698.456;
+	static final double FREQ_G =  783.991;
+
 	AudioTrack mTrack;
 	short[] buf = new short[SAMPLE_SIZE];
 	short[] mSnd_a = new short[SAMPLE_SIZE];
@@ -48,8 +58,8 @@ public class L7wavActivity extends Activity
 
 		init_snd_arrays();
 
-		int minSize = AudioTrack.getMinBufferSize(44100, AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT);
-		mTrack = new AudioTrack(AudioManager.STREAM_MUSIC, 44100,
+		int minSize = AudioTrack.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT);
+		mTrack = new AudioTrack(AudioManager.STREAM_MUSIC, SAMPLE_RATE,
 			AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT,
 			minSize, AudioTrack.MODE_STREAM);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -116,20 +126,20 @@ public class L7wavActivity extends Activity
 
 	void init_snd_arrays()
 	{
-		init_sin_wav(mSnd_a, 440);
-		init_sin_wav(mSnd_b, 493.883);
-		init_sin_wav(mSnd_c, 523.251);
-		init_sin_wav(mSnd_d, 587.33);
-		init_sin_wav(mSnd_e, 659.255);
-		init_sin_wav(mSnd_f, 698.456);
-		init_sin_wav(mSnd_g, 783.991);
+		init_sin_wav(mSnd_a, FREQ_A);
+		init_sin_wav(mSnd_b, FREQ_B);
+		init_sin_wav(mSnd_c, FREQ_C);
+		init_sin_wav(mSnd_d, FREQ_D);
+		init_sin_wav(mSnd_e, FREQ_E);
+		init_sin_wav(mSnd_f, FREQ_F);
+		init_sin_wav(mSnd_g, FREQ_G);
 	}
 
 	void init_sin_wav(short[] buf, double freq) {
 		float angle = 0;
 		for (int i=0; i < SAMPLE_SIZE; ++i) {
 			buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
-			angle += (float)(2*Math.PI) * freq / 44100;
+			angle += (float)(2*Math.PI) * freq / SAMPLE_RATE;
 		}
 	}
 
