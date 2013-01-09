@@ -30,7 +30,7 @@ import android.widget.Button;
 public class L7wavActivity extends Activity
 {
 	static final int SAMPLE_RATE = 44100;
-	static final int SAMPLE_SIZE = SAMPLE_RATE / 10;
+	static final int SAMPLE_SIZE = SAMPLE_RATE / 8;
 
 	static final double FREQ_A =  440;
 	static final double FREQ_B =  493.883;
@@ -63,13 +63,13 @@ public class L7wavActivity extends Activity
 
 	void init_snd_arrays()
 	{
-		init_sin_wav(mSnd_a, FREQ_A);
-		init_sin_wav(mSnd_b, FREQ_B);
-		init_sin_wav(mSnd_c, FREQ_C);
-		init_sin_wav(mSnd_d, FREQ_D);
-		init_sin_wav(mSnd_e, FREQ_E);
-		init_sin_wav(mSnd_f, FREQ_F);
-		init_sin_wav(mSnd_g, FREQ_G);
+		init_l7wav(mSnd_a, FREQ_A);
+		init_l7wav(mSnd_b, FREQ_B);
+		init_l7wav(mSnd_c, FREQ_C);
+		init_l7wav(mSnd_d, FREQ_D);
+		init_l7wav(mSnd_e, FREQ_E);
+		init_l7wav(mSnd_f, FREQ_F);
+		init_l7wav(mSnd_g, FREQ_G);
 	}
 
 	void init_buttons()
@@ -110,6 +110,20 @@ public class L7wavActivity extends Activity
 //		} while (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
 
 		mTrack.play();
+	}
+
+	void init_l7wav(short[] buf, double freq) {
+		boolean pos = true;
+		short x = Short.MAX_VALUE;
+		int j = 0;
+		for (int i=0; i < SAMPLE_SIZE; ++i, ++j) {
+			buf[i] = x;
+			if (j == (int) (SAMPLE_RATE / (freq / 1.))) {
+				j = 0;
+				pos = !pos;
+				x = pos ? Short.MAX_VALUE : Short.MIN_VALUE;
+			}
+		}
 	}
 
 	void init_sin_wav(short[] buf, double freq) {
