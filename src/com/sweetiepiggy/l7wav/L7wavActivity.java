@@ -193,7 +193,7 @@ public class L7wavActivity extends Activity
 		float angle = 0;
 		for (int i=0; i < SAMPLE_SIZE; ++i) {
 			buf[i] = (short)(Math.sin(angle)*Short.MAX_VALUE);
-			angle += (float)(2*Math.PI) * freq / SAMPLE_RATE;
+			angle += (float)(2*Math.PI) * (freq / 2.) / SAMPLE_RATE;
 		}
 	}
 
