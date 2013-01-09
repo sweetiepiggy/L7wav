@@ -22,49 +22,65 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
+	android:padding="100dp"
+	android:gravity="center"
 	android:orientation="horizontal" >
 
 	<Button
 		android:id="@+id/a_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:text="@string/a"/>
+		android:layout_weight="3"
+		android:background="#80FF0000"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp" />
 	<Button
 		android:id="@+id/b_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_weight="1"
-		android:text="b"/>
+		android:background="@android:color/white"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp" />
 	<Button
 		android:id="@+id/c_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:text="c"/>
+		android:layout_weight="2"
+		android:background="#80FFFF00"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp" />
 	<Button
 		android:id="@+id/d_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_weight="1"
-		android:text="d"/>
+		android:background="@android:color/white"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp" />
 	<Button
 		android:id="@+id/e_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:text="e"/>
+		android:layout_weight="2"
+		android:background="#80FFFF00"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp" />
 	<Button
 		android:id="@+id/f_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_weight="1"
-		android:text="f"/>
+		android:background="@android:color/white"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp" />
 	<Button
 		android:id="@+id/g_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:text="g"/>
+		android:layout_weight="2"
+		android:background="#80FFFF00"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp" />
 
 </LinearLayout>
