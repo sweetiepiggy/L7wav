@@ -30,7 +30,7 @@ import android.widget.Button;
 public class L7wavActivity extends Activity
 {
 	static final int SAMPLE_RATE = 44100;
-	static final int SAMPLE_SIZE = SAMPLE_RATE / 8;
+	static final int SAMPLE_SIZE = SAMPLE_RATE / 10;
 
 	static final double FREQ_A =  440;
 	static final double FREQ_B =  493.883;
