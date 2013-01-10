@@ -20,12 +20,17 @@
 package com.sweetiepiggy.l7wav;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -33,18 +38,20 @@ import android.widget.LinearLayout.LayoutParams;
 
 public class L7wavActivity extends Activity
 {
-	static final int SAMPLE_RATE = 44100;
-	static final int SAMPLE_SIZE = SAMPLE_RATE / 10;
+	private static final String SOURCE_URL = "https://github.com/sweetiepiggy/L7wav";
 
-	static final double FREQ_A =  440;
-	static final double FREQ_B =  493.883;
-	static final double FREQ_C =  523.251;
-	static final double FREQ_D =  587.33;
-	static final double FREQ_E =  659.255;
-	static final double FREQ_F =  698.456;
-	static final double FREQ_G =  783.991;
+	private static final int SAMPLE_RATE = 44100;
+	private static final int SAMPLE_SIZE = SAMPLE_RATE / 10;
 
-	AudioTrack mTrack;
+	private static final double FREQ_A =  440;
+	private static final double FREQ_B =  493.883;
+	private static final double FREQ_C =  523.251;
+	private static final double FREQ_D =  587.33;
+	private static final double FREQ_E =  659.255;
+	private static final double FREQ_F =  698.456;
+	private static final double FREQ_G =  783.991;
+
+	private AudioTrack mTrack;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -189,6 +196,31 @@ public class L7wavActivity extends Activity
 	void play_sound(short[] buf)
 	{
 		mTrack.write(buf, 0 , SAMPLE_SIZE);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.options_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		switch (item.getItemId()) {
+		case R.id.about:
+			intent = new Intent(getApplicationContext(), AboutActivity.class);
+			startActivity(intent);
+			return true;
+		case R.id.source:
+			intent = new Intent(Intent.ACTION_VIEW);
+			intent.setDataAndType(Uri.parse(SOURCE_URL), "text/html");
+			startActivity(Intent.createChooser(intent, null));
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }
 
