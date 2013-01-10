@@ -20,6 +20,7 @@
 package com.sweetiepiggy.l7wav;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
@@ -51,20 +52,33 @@ public class L7wavActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		create_row(7);
-		create_row(6);
-		create_row(5);
+		int screenSize = getResources().getConfiguration().screenLayout &
+			Configuration.SCREENLAYOUT_SIZE_MASK;
+
+		if (screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE ||
+				screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE) {
+			create_row(7);
+			create_row(6);
+			create_row(5);
+		}
+
 		create_row(4);
 		create_row(3);
 		create_row(2);
-		create_row(1);
-		create_row(0);
+
+		if (screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
+			create_row(1);
+			create_row(0);
+		}
 
 		init_audio_track();
 	}
 
 	void create_row(int octave)
 	{
+		int screenSize = getResources().getConfiguration().screenLayout &
+			Configuration.SCREENLAYOUT_SIZE_MASK;
+
 		LinearLayout top_layout = (LinearLayout) findViewById(R.id.top_layout);
 
 		LinearLayout row_layout = new LinearLayout(this);
@@ -72,7 +86,12 @@ public class L7wavActivity extends Activity
 		row_layout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 					LayoutParams.WRAP_CONTENT));
 		row_layout.setGravity(Gravity.CENTER);
-		row_layout.setPadding(100, 10, 100, 10);
+
+		if (screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
+			row_layout.setPadding(100, 10, 100, 10);
+		} else {
+			row_layout.setPadding(10, 10, 10, 10);
+		}
 
 		double octave_multiplier = Math.pow(2, octave);
 
